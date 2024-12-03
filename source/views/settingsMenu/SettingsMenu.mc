@@ -67,7 +67,6 @@ function SettingsMenu() as WatchUi.Menu2 or WatchUi.CustomMenu {
         SettingsMenuBuilder.generateMenuItem(SettingsMenuBuilder.ITEM, {
             :identifier => SettingType.DATE_FORMAT,
             :label => Rez.Strings.DateFormat
-            // :subLabel => _getSubLabelValue(SettingType.DATE_FORMAT)
         })
     );
     menu.addItem(
@@ -126,6 +125,13 @@ function SettingsMenu() as WatchUi.Menu2 or WatchUi.CustomMenu {
             :identifier => SettingType.BOTTOM_SENSOR_3,
             :label => Rez.Strings.BottomSensor3,
             :subLabel => _getSubLabelValue(SettingType.BOTTOM_SENSOR_3)
+        })
+    );
+
+    menu.addItem(
+        SettingsMenuBuilder.generateMenuItem(SettingsMenuBuilder.ITEM, {
+            :identifier => SettingType.DOT_HOUR_TRANS,
+            :label => Rez.Strings.DotHourTransparency
         })
     );
 

@@ -20,4 +20,6 @@
     <property id="OpenWeatherIntervalMinutes" type="number">30</property>
     <property id="OpenWeatherLat" type="string"></property>
     <property id="OpenWeatherLon" type="string"></property>
+    <property id="DotHourTransparency" type="number">0</property>
+    <property id="DateFormat" type="number">0</property>
 </properties>

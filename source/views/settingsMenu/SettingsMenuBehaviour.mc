@@ -32,6 +32,7 @@ class SettingsMenuBehaviour extends WatchUi.Menu2InputDelegate {
         SettingType.SHOW_STATUS_ICONS => :toggleFieldHangler,
         SettingType.DISPLAY_SECONDS => :displaySecondsHandler,
         SettingType.SECOND_TIME_FORMAT => :displaySecondTimeHandler,
+        SettingType.DOT_HOUR_TRANS => :displayPatternTransHandler,
         SettingType.DATE_FORMAT => :displayDateFormatHandler
     };
 
@@ -180,11 +181,32 @@ class SettingsMenuBehaviour extends WatchUi.Menu2InputDelegate {
         self.openMenu(item.getId() as SettingType.Enum, menu, false);
     }
 
+    function displayPatternTransHandler(item as WatchUi.MenuItem or WatchUi.CustomMenuItem) as Void {
+        var menu = self._createCustomMenu(item.getLabel());
+
+        if (GlobalKeys.CAN_CREATE_COLOR) {
+            self._addMapItems(menu, {
+                0 => "0%",
+                25 => "25%",
+                50 => "50%",
+                75 => "75%",
+                100 => "100%"
+            });
+        } else {
+            self._addMapItems(menu, {
+                0 => "0%",
+                100 => "100%"
+            });
+        }
+
+        self.openMenu(item.getId() as SettingType.Enum, menu, false);
+    }
+
     function displayDateFormatHandler(item as WatchUi.ToggleMenuItem) as Void {
         var menu = self._createCustomMenu(item.getLabel());
         self._addMapItems(menu, {
-            DisplayDateFormatType.DDMM => Rez.Strings.DateFormatEng,
-            DisplayDateFormatType.MMDD => Rez.Strings.DateFormatMMdd
+            FormatDate.DisplayDateFormatType.DDMM => Rez.Strings.DateFormatEng,
+            FormatDate.DisplayDateFormatType.MMDD => Rez.Strings.DateFormatMMdd
         });
 
         self.openMenu(item.getId() as SettingType.Enum, menu, false);
@@ -200,7 +222,7 @@ class SettingsMenuBehaviour extends WatchUi.Menu2InputDelegate {
         WatchUi.switchToView(
             menu,
             new CustomMenuDelegate(settingKey, clearPrevSensorCache, self._onBackCallback),
-            WatchUi.SLIDE_UP
+            WatchUi.SLIDE_IMMEDIATE
         );
     }
 

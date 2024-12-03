@@ -22,12 +22,13 @@ module SettingsModule {
             SHOW_STATUS_ICONS = "DisplayStatusIcons", // to migrate
             DISPLAY_SECONDS = "DisplaySeconds",
             SECOND_TIME_FORMAT = "SecondTimeFormat",
-            DATE_FORMAT = "DateFormat",
             OPENWEATHER_API_KEY = "OpenWeatherAPIKey",
             OPENWEATHER_INTERVAL = "OpenWeatherIntervalMinutes",
             OPENWEATHER_ENABLED = "OpenWeatherEnabled",
             OPENWEATHER_LAT = "OpenWeatherLat",
-            OPENWEATHER_LON = "OpenWeatherLon"
+            OPENWEATHER_LON = "OpenWeatherLon",
+            DOT_HOUR_TRANS = "DotHourTransparency",
+            DATE_FORMAT = "DateFormat"
         }
     }
 
@@ -35,13 +36,6 @@ module SettingsModule {
         enum Enum {
             NEVER = 0,
             ON_GESTURE = 1
-        }
-    }
-
-    module DisplayDateFormatType {
-        enum Enum {
-            DDMM = 0,
-            MMDD = 1
         }
     }
 

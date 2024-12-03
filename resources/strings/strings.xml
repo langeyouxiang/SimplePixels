@@ -1,5 +1,5 @@
 <strings>
-    <string id="AppName">Simple Pixels</string>
+    <string id="AppName">Simple Pixels (beta)</string>
     <string id="SettingsMenu">Settings</string>
 
     <string id="BackgroundColorTitle">Background color</string>
@@ -75,6 +75,7 @@
     <string id="SecondTime">Second time</string>
 
     <string id="DisplaySeconds">Display seconds</string>
+    <string id="DotHourTransparency">Pattern transparency</string>
 
     <string id="Never">Never</string>
     <string id="OnGesture">On Gesture</string>
