@@ -9,7 +9,7 @@ class BackgroundController {
     var isRunning as Boolean = false;
 
     function setup() as Void {
-        var isEnabled = !!SettingsModule.getValue(SettingType.OW_ENABLED);
+        var isEnabled = self._isEnabled();
 
         if (isEnabled) {
             self.runNow();
@@ -19,10 +19,7 @@ class BackgroundController {
     }
 
     function scheduleNext() as Void {
-        var intervalMinutes = SettingsModule.getValue(SettingType.OW_INTERVAL);
-        intervalMinutes = intervalMinutes != null ? intervalMinutes : 30;
-
-        var intervalSeconds = intervalMinutes * 60;
+        var intervalSeconds = self._getInterval() * 60;
         var nextTime = Time.now().add(new Time.Duration(intervalSeconds));
 
         self._run(nextTime);
@@ -40,12 +37,26 @@ class BackgroundController {
         self._run(nextTime);
     }
 
+    function _isEnabled() as Boolean {
+        return !!SettingsModule.getValue(SettingType.OW_ENABLED);
+    }
+
+    function _getInterval() as Number {
+        var intervalMinutes = SettingsModule.getValue(SettingType.OW_INTERVAL);
+
+        return intervalMinutes != null ? intervalMinutes : 30;
+    }
+
     function _run(time as Time.Moment or Time.Duration) as Void {
         self._remove();
         self._registerTask(time);
     }
 
     function _registerTask(time as Time.Moment or Time.Duration) as Void {
+        if (!self._isEnabled() || self.isRunning) {
+            return;
+        }
+
         self.isRunning = true;
 
         Background.registerForTemporalEvent(time);
