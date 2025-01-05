@@ -15,6 +15,10 @@ class SimplePixelsView extends WatchUi.WatchFace {
         Services.register();
     }
 
+    function _onConnectionChanged(value as ObserverModule.InstanceGetter, prevValue as ObserverModule.InstanceGetter) as Void {
+        OWBackgroundController.setup();
+    }
+
     function _onSettingsChanged(value as ObserverModule.InstanceGetter, prevValue as ObserverModule.InstanceGetter) as Void {
         var viewValues = ViewsKeys.VALUES;
 
@@ -41,7 +45,8 @@ class SimplePixelsView extends WatchUi.WatchFace {
         Services.ObserverStore().setup([
             new AwakeObserver(self.method(:_updateSecondsViewProps), true),
             new DisplaySecondsObserver(self.method(:_updateSecondsViewProps)),
-            new OnSettingsChangedObserver(self.method(:_onSettingsChanged))
+            new OnSettingsChangedObserver(self.method(:_onSettingsChanged)),
+            new ConnectionObserverObserver(self.method(:_onConnectionChanged)),
         ] as Array<ValueObserver>);
 
         if (GlobalKeys.IS_NEW_SDK) {

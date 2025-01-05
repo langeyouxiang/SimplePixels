@@ -21,7 +21,7 @@ class AwakeObserver extends ObserverModule.ValueObserver {
         self.isAwake = isAwake;
     }
 
-    function getObservedValue() as Lang.Object? {
+    function getObservedValue() as InstanceGetter {
         var service = Services.SensorInfo();
         var isNightMode = service.getValue(SensorTypes.IS_NIGHT_MODE_ENABLED);
         var isSleepTime = service.getValue(SensorTypes.IS_SLEEP_TIME);
