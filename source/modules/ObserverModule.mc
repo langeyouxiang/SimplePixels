@@ -11,11 +11,11 @@ module ObserverModule {
         ON_EXIT_SLEEP
     }
 
-    typedef InstanceKey as String;
+    typedef InstanceKey as Symbol;
     typedef InstanceGetter as Object?;
 
     class ValueObserver {
-        static var key as String = "";
+        static var key as InstanceKey = :valueObserver;
         var scope as Array<Scope> = [ON_UPDATE];
 
         private var _onValueUpdatedCallback as Method? = null;
@@ -87,7 +87,7 @@ module ObserverModule {
             return [currentValue, prevValue];
         }
 
-        function getValue(instanceKey as String) as Lang.Object? {
+        function getValue(instanceKey as InstanceKey) as Lang.Object? {
             return self._cachedResults.get(instanceKey);
         }
 
