@@ -4,7 +4,7 @@ import Services;
 import SensorTypes;
 
 class AwakeObserver extends ObserverModule.ValueObserver {
-    static var key as String = "AwakeObserver";
+    static var key as InstanceKey = :awakeObserver;
     static var isAwake as Boolean;
 
     var scope as Array<Scope> = [

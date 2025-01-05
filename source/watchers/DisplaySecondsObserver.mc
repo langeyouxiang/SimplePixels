@@ -3,7 +3,7 @@ import ObserverModule;
 import SettingsModule;
 
 class DisplaySecondsObserver extends ObserverModule.ValueObserver {
-    static var key as String = "DisplaySecondsObserver";
+    static var key as InstanceKey = :displaySecondsObserver;
     var scope as Array<Scope> = [ObserverModule.ON_SETTINGS_CHANGED];
 
     function initialize(onValueUpdated as Method?) {
