@@ -10,7 +10,7 @@ class DisplaySecondsObserver extends ObserverModule.ValueObserver {
         ObserverModule.ValueObserver.initialize(onValueUpdated);
     }
 
-    function getObservedValue() as Lang.Object? {
+    function getObservedValue() as InstanceGetter {
         return SettingsModule.getValue(SettingsModule.SettingType.DISPLAY_SECONDS);
     }
 }
