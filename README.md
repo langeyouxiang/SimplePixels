@@ -45,6 +45,10 @@ I wanted to add more screens and AMOLED support, but the resource management and
 
 ## Changelog
 
+### v1.3.0
+
+* [[kuzan](https://github.com/langeyouxiang)] Support for AMOLED devices
+
 ### v1.2.8
 
 * Improved the way to change the transparency of the pattern color
