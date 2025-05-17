@@ -35,14 +35,8 @@ class InfoBarView extends Components.Box {
             SettingsModule.getValue(SettingType.SEPARATOR_COLOR) as ColorsTypes.Enum
         );
         self._sensorType = SettingsModule.getValue(SettingType.SEPARATOR_INFO) as SensorTypes.Enum;
-        
-        DotPattern.create(
-            DotPattern.INFO_BAR,
-            self.getWidth(),
-            self.getHeight(),
-            self._barColor,
-            self.backgroundColor
-        );
+
+        DotPattern.create(DotPattern.INFO_BAR, self.getWidth(), self.getHeight(), self._barColor, self.backgroundColor);
     }
 
     private function calculatePercente(curentValue as Number?, maxValue as Number?) as Float or Number {
@@ -70,27 +64,39 @@ class InfoBarView extends Components.Box {
         var height = self.getHeight();
         var posX = self.getPosX();
         var posY = self.getPosY();
-
-        var sensorValue = Services.SensorInfo().getValue(self._sensorType);
-        var maxValue = self.getGoal(self._sensorType);
-        var percent = self.calculatePercente(sensorValue, maxValue);
-        var isCompleted = percent.toNumber() == 100;
-
-        var barHeight = height.toFloat() * (percent / 100);
-        var valueBarShift = height - barHeight;
-
-        if (!isCompleted) {
-            var pattern = DotPattern.get(
-                DotPattern.INFO_BAR,
-                width,
-                height,
-                self._barColor,
-                self.backgroundColor
-            );
+        if (self.isAod) {
+            drawContext.clear();
+            var pattern = DotPattern.get(DotPattern.INFO_BAR, 2, height, self.aodColor, Graphics.COLOR_BLACK);
             drawContext.drawBitmap(posX, posY, pattern);
-        }
+        } else {
+            var sensorValue = Services.SensorInfo().getValue(self._sensorType);
+            var maxValue = self.getGoal(self._sensorType);
+            var percent = self.calculatePercente(sensorValue, maxValue);
+            var isCompleted = percent.toNumber() == 100;
 
-        drawContext.setColor(self._barColor, Graphics.COLOR_TRANSPARENT);
-        drawContext.fillRectangle(posX, posY + valueBarShift, width, barHeight);
+            var barHeight = height.toFloat() * (percent / 100);
+            var valueBarShift = height - barHeight;
+
+            if (!isCompleted) {
+                var pattern = DotPattern.get(DotPattern.INFO_BAR, width, height, self._barColor, self.backgroundColor);
+                drawContext.drawBitmap(posX, posY, pattern);
+            }
+
+            drawContext.setColor(self._barColor, Graphics.COLOR_TRANSPARENT);
+            drawContext.fillRectangle(posX, posY + valueBarShift, width, barHeight);
+        }
+    }
+
+    function setAodMode(isAod as Boolean) as Void {
+        self.isAod = isAod;
+        self.setVisibility();
+    }
+
+    function setVisibility() as Void {
+        if (self.isAod) {
+            DotPattern.create(DotPattern.INFO_BAR, 2, self.getHeight(), self.aodColor, Graphics.COLOR_TRANSPARENT);
+        } else {
+            self.updateProps();
+        }
     }
 }

@@ -109,4 +109,13 @@ class PhantomTimeView extends Components.TimeView {
 
         drawContext.drawBitmap(self.getPosX(), self.getPosY(), pattern);
     }
+
+    function setAodMode(isAod as Boolean) as Void {
+        self.isAod = isAod;
+        self.setVisibility();
+    }
+
+    function setVisibility() as Void {
+        self.setVisible(!self.isAod);
+    }
 }

@@ -21,8 +21,12 @@ class PMView extends Components.Box {
         if (GlobalKeys.IS_24_HOUR) {
             return;
         }
+        if (self.isAod) {
+            drawContext.setColor(self.aodColor, Graphics.COLOR_TRANSPARENT);
+        } else {
+            drawContext.setColor(self.foregroundColor, Graphics.COLOR_TRANSPARENT);
+        }
 
-        drawContext.setColor(self.foregroundColor, Graphics.COLOR_TRANSPARENT);
         drawContext.drawText(self.getPosX(), self.getPosY(), self.getFont(), self.getPM(), Graphics.TEXT_JUSTIFY_LEFT);
     }
 }

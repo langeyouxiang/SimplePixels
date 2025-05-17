@@ -87,8 +87,35 @@ module Components {
         }
 
         protected function renderTime(time as Number, drawContext as Dc) as Void {
-            drawContext.setColor(self.foregroundColor, Graphics.COLOR_TRANSPARENT);
-            drawContext.drawText(self.textPosX, self.textPosY, self.getFont(), time.format("%02d"), self._textAligment);
+            if (self.isAod && GlobalKeys.IS_AMOLED) {
+                drawContext.setColor(self.aodColor, Graphics.COLOR_TRANSPARENT);
+                if (self._timeType == TimeViewType.HOURS) {
+                    drawContext.drawText(
+                        self.textPosX,
+                        self.textPosY,
+                        GlobalKeys.IS_AMOLED ? ResourcesCache.get(Rez.Fonts.hours_aod) : self.getFont(),
+                        time.format("%02d"),
+                        self._textAligment
+                    );
+                } else {
+                    drawContext.drawText(
+                        self.textPosX,
+                        self.textPosY,
+                        GlobalKeys.IS_AMOLED ? ResourcesCache.get(Rez.Fonts.minutes_aod) : self.getFont(),
+                        time.format("%02d"),
+                        self._textAligment
+                    );
+                }
+            } else {
+                drawContext.setColor(self.foregroundColor, Graphics.COLOR_TRANSPARENT);
+                drawContext.drawText(
+                    self.textPosX,
+                    self.textPosY,
+                    self.getFont(),
+                    time.format("%02d"),
+                    self._textAligment
+                );
+            }
         }
 
         protected function render(drawContext as Dc) as Void {

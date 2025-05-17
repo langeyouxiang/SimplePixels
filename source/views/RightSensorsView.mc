@@ -78,4 +78,13 @@ class RightSensorsView extends Components.List {
             :drawContext => drawContext
         });
     }
+
+    function setAodMode(isAod as Boolean) as Void {
+        self.isAod = isAod;
+        self.setVisibility();
+    }
+
+    function setVisibility() as Void {
+        self.setVisible(!self.isAod);
+    }
 }

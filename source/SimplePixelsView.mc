@@ -15,22 +15,52 @@ class SimplePixelsView extends WatchUi.WatchFace {
         Services.register();
     }
 
-    function _onConnectionChanged(value as ObserverModule.InstanceGetter, prevValue as ObserverModule.InstanceGetter) as Void {
+    function _onConnectionChanged(
+        value as ObserverModule.InstanceGetter,
+        prevValue as ObserverModule.InstanceGetter
+    ) as Void {
         OWBackgroundController.setup();
     }
 
-    function _onAwakeChanged(value as ObserverModule.InstanceGetter, prevValue as ObserverModule.InstanceGetter) as Void {
+    function _onAODChanged(
+        value as ObserverModule.InstanceGetter,
+        prevValue as ObserverModule.InstanceGetter
+    ) as Void {
+        if (GlobalKeys.IS_AMOLED) {
+            aodMode(value as Boolean);
+        }
+    }
+
+    function _onAwakeChanged(
+        value as ObserverModule.InstanceGetter,
+        prevValue as ObserverModule.InstanceGetter
+    ) as Void {
         var secondsView = self.findDrawableById(ViewsKeys.SECONDS) as SecondsView;
-        
+
         secondsView.setViewProps(value as Boolean);
         WatchUi.requestUpdate();
     }
 
-    function onInit(drawContext as Dc) as Void {    
-        Services.ObserverStore().setup([
-            new AwakeObserver(self.method(:_onAwakeChanged), true),
-            new ConnectionObserverObserver(self.method(:_onConnectionChanged)),
-        ] as Array<ValueObserver>);
+    function aodMode(isAod as Boolean) {
+        var viewValues = ViewsKeys.VALUES;
+
+        for (var i = 0; i < viewValues.size(); i++) {
+            var id = viewValues[i] as String;
+            var view = self.findDrawableById(id);
+
+            (view as Components.BaseDrawable).setAodMode(isAod);
+        }
+        WatchUi.requestUpdate();
+    }
+
+    function onInit(drawContext as Dc) as Void {
+        Services.ObserverStore().setup(
+            [
+                new AwakeObserver(self.method(:_onAwakeChanged), true),
+                new ConnectionObserverObserver(self.method(:_onConnectionChanged)),
+                new AODObserver(self.method(:_onAODChanged))
+            ] as Array<ValueObserver>
+        );
 
         if (GlobalKeys.IS_NEW_SDK) {
             Services.SensorInfo().init();
