@@ -32,12 +32,9 @@ class DateView extends Components.Box {
 
         var font = self.getFont();
         var fontHeight = drawContext.getFontHeight(font);
-        if (self.isAod) {
-            drawContext.setColor(self.aodColor, Graphics.COLOR_TRANSPARENT);
-        } else {
-            drawContext.setColor(self.infoColor, Graphics.COLOR_TRANSPARENT);
-        }
+        var color = self.isAod ? self.aodColor : self.infoColor;
 
+        drawContext.setColor(color, Graphics.COLOR_TRANSPARENT);
         drawContext.drawText(posX + width, posY, font, dateObj[0], Graphics.TEXT_JUSTIFY_RIGHT);
         drawContext.drawText(posX + width, posY + fontHeight, font, dateObj[1], Graphics.TEXT_JUSTIFY_RIGHT);
     }

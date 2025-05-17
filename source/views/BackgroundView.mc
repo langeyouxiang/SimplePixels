@@ -9,11 +9,9 @@ class BackgroundView extends Components.BaseDrawable {
     }
 
     function draw(dc as Dc) as Void {
-        if (self.isAod) {
-            dc.setColor(Graphics.COLOR_TRANSPARENT, Graphics.COLOR_BLACK);
-        } else {
-            dc.setColor(Graphics.COLOR_TRANSPARENT, self.backgroundColor);
-        }
+        var color = self.isAod ? Graphics.COLOR_BLACK : self.backgroundColor;
+
+        dc.setColor(Graphics.COLOR_TRANSPARENT, color);
         dc.clear();
     }
 }

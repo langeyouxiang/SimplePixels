@@ -14,10 +14,6 @@ class AODObserver extends ObserverModule.ValueObserver {
     }
 
     function getObservedValue() as InstanceGetter {
-        return System has :getDisplayMode
-            ? System.getDisplayMode() == System.DISPLAY_MODE_LOW_POWER
-                ? true
-                : false
-            : null;
+        return System has :getDisplayMode && System.getDisplayMode() == System.DISPLAY_MODE_LOW_POWER;
     }
 }

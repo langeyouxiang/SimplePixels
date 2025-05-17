@@ -35,6 +35,7 @@
             <param name="horizontalAlignment">PositionUtils.ALIGN_END</param>
             <param name="verticalAlignment">PositionUtils.ALIGN_CENTER</param>
             <param name="font">@Rez.Fonts.hours</param>
+            <param name="aodFont">@Rez.Fonts.hours_aod</param>
             <param name="type">Components.TimeViewType.HOURS</param>
             <param name="textAligment">Graphics.TEXT_JUSTIFY_RIGHT</param>
         </drawable>
@@ -84,6 +85,7 @@
             <param name="horizontalAlignment">PositionUtils.ALIGN_START</param>
             <param name="verticalAlignment">PositionUtils.ALIGN_CENTER</param>
             <param name="font">@Rez.Fonts.minutes</param>
+            <param name="aodFont">Rez.Fonts.minutes_aod</param>
             <param name="type">Components.TimeViewType.MINUTES</param>
         </drawable>
         <drawable id="PM" class="PMView">
