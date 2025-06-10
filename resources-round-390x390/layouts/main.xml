@@ -17,7 +17,7 @@
         </drawable>
         <drawable id="Date" class="DateView">
             <param name="boxWidth">"100"</param>
-            <param name="boxHeight">"55"</param>
+            <param name="boxHeight">"60"</param>
             <param name="xPos">"50%"</param>
             <param name="yPos">"26%"</param>
             <param name="xShift">"-18"</param>
